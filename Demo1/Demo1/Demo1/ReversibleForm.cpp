@@ -1,6 +1,6 @@
 #include "ReversibleForm.h"
 
-#define ON_PAINT
+//#define ON_PAINT
 
 ReversibleForm::ReversibleForm()
 {
@@ -60,8 +60,8 @@ void ReversibleForm::OnPaint(PaintEventArgs ^ e)
 void ReversibleForm::DrawRectangle(const Drawing::Rectangle % rc)
 {
 #ifndef ON_PAINT
-	ControlPaint::DrawReversibleFrame(m_preRect, Drawing::Color::Black, FrameStyle::Thick);
+	ControlPaint::DrawReversibleFrame(m_preRect, Drawing::Color::Black, FrameStyle::Dashed);
 	m_preRect = rc;
 #endif // !ON_PAINT
-	ControlPaint::DrawReversibleFrame(rc, Drawing::Color::Black, FrameStyle::Thick);
+	ControlPaint::DrawReversibleFrame(rc, Drawing::Color::Black, FrameStyle::Dashed);
 }

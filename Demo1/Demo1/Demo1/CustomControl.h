@@ -15,6 +15,9 @@ protected:
 	virtual void OnMouseMove(MouseEventArgs^ e) override;
 	virtual void OnMouseUp(MouseEventArgs^ e) override;
 	virtual void OnPaint(PaintEventArgs^ e) override;
+
+	virtual void OnBackColorChanged(System::EventArgs^ e) override;
+	virtual void OnParentBackColorChanged(EventArgs^ e) override;
 private:
 	void drawRectangle(Graphics^ g);
 
@@ -24,5 +27,8 @@ private:
 	int m_startY;
 	int m_curX;
 	int m_curY;
+	int alpha;
+	int m_opacity = 100;
+	bool drag = false;
 };
 

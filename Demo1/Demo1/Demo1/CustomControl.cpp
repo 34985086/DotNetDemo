@@ -7,8 +7,8 @@ CustomControl::CustomControl()
 	SetStyle(ControlStyles::SupportsTransparentBackColor, true);
 	//SetStyle(ControlStyles::OptimizedDoubleBuffer, true);
 	SetStyle(ControlStyles::Opaque, true);
-	SetStyle(ControlStyles::UserPaint, true);
-	SetStyle(ControlStyles::AllPaintingInWmPaint, true);
+	//SetStyle(ControlStyles::UserPaint, true);
+	//SetStyle(ControlStyles::AllPaintingInWmPaint, true);
 	//SetStyle(ControlStyles::ResizeRedraw, true);
 	BackColor = Color::Transparent;
 }
@@ -45,8 +45,48 @@ void CustomControl::OnPaint(System::Windows::Forms::PaintEventArgs ^ e)
 	Control::OnPaint(e);
 	
 	Drawing::Graphics^g = e->Graphics;
-	g->Clear(Color::FromArgb(0, 200, 0, 0));
-	ButtonRenderer::DrawParentBackground(g, this->ClientRectangle, this);
+	Rectangle bounds(0, 0, Width - 1, Height - 1);
+
+	Color frmColor = Parent->BackColor;
+	Brush^ bckColor;
+
+	alpha = (m_opacity * 255) / 100;
+
+	if (drag)
+	{
+		Color dragBckColor;
+
+		if (BackColor != Color::Transparent)
+		{
+			int Rb = BackColor.R * alpha / 255 + frmColor.R * (255 - alpha) / 255;
+			int Gb = BackColor.G * alpha / 255 + frmColor.G * (255 - alpha) / 255;
+			int Bb = BackColor.B * alpha / 255 + frmColor.B * (255 - alpha) / 255;
+			dragBckColor = Color::FromArgb(Rb, Gb, Bb);
+		}
+		else
+		{
+			dragBckColor = frmColor;
+		}
+
+		alpha = 255;
+		bckColor = gcnew SolidBrush(Color::FromArgb(alpha, dragBckColor));
+	}
+	else
+	{
+		bckColor = gcnew SolidBrush(Color::FromArgb(alpha, BackColor));
+	}
+
+	if (BackColor != Color::Transparent | drag)
+	{
+		g->FillRectangle(bckColor, bounds);
+	}
+
+	
+
+
+
+	/*g->Clear(Color::FromArgb(0, 200, 0, 0));
+	ButtonRenderer::DrawParentBackground(g, this->ClientRectangle, this);*/
 	//
 	drawRectangle(g);
 
@@ -58,6 +98,25 @@ void CustomControl::OnPaint(System::Windows::Forms::PaintEventArgs ^ e)
 #if 0
 	g->DrawString("1234567890", gcnew System::Drawing::Font("Arial", 20), System::Drawing::Brushes::Red, 0, 0);
 #endif
+
+	//bckColor->Dispose();
+	//g->Dispose();
+	Control::OnPaint(e);
+}
+
+void CustomControl::OnBackColorChanged(System::EventArgs ^ e)
+{
+	if (this->Parent != nullptr)
+	{
+		Parent->Invalidate(Bounds, true);
+	}
+	Control::OnBackColorChanged(e);
+}
+
+void CustomControl::OnParentBackColorChanged(EventArgs ^ e)
+{
+	Invalidate();
+	Control::OnParentBackColorChanged(e);
 }
 
 void CustomControl::drawRectangle(Drawing::Graphics^ g)
