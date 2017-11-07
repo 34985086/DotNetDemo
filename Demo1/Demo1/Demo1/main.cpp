@@ -1,8 +1,8 @@
 #include "MyForm.h"
-#include "MyWidget.h"
-
+#include "ReversibleForm.h"
+#include "GraphicForm.h"
 int main()
 {
-	//Application::Run(gcnew MyForm);
-	Application::Run(gcnew MyWidget);
+	//Application::Run(gcnew ReversibleForm);
+	Application::Run(gcnew GraphicForm);
 }
