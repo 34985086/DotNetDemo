@@ -27,5 +27,6 @@ private:
 	Drawing::Rectangle m_curRect;
 
 	CustomControl^ m_control;
+	void OnSelectionBtnClick(System::Object ^sender, System::EventArgs ^e);
 };
 
