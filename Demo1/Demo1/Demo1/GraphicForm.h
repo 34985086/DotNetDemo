@@ -1,4 +1,5 @@
 #pragma once
+#include "CustomControl.h"
 using namespace System;
 using namespace System::Windows;
 using namespace System::Windows::Forms;
@@ -24,5 +25,7 @@ private:
 	Drawing::Point m_endPoint;
 	Drawing::Rectangle m_preRect;
 	Drawing::Rectangle m_curRect;
+
+	CustomControl^ m_control;
 };
 
