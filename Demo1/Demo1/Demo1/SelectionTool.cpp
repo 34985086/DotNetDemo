@@ -43,12 +43,12 @@ void SelectionTool::OnPaint(PaintEventArgs ^ e)
 	StringFormat^format = gcnew StringFormat;
 	format->Alignment = StringAlignment::Center;
 	format->LineAlignment = StringAlignment::Center;
-	e->Graphics->DrawString("Drawing Layer", gcnew Drawing::Font("Arial", 20), Brushes::Red, rectF, format);
+	e->Graphics->DrawString("Drawing Layer", gcnew Drawing::Font("Arial", 20), Brushes::White, rectF, format);
 
 	if (m_isPressed) {
 		Console::WriteLine("SelectionTool::OnPaint");
 		Pen^ pen = gcnew Drawing::Pen(Color::White, 2);
-		pen->DashStyle = Drawing2D::DashStyle::Dash;
+		pen->DashStyle = Drawing2D::DashStyle::Solid;
 		Rectangle rc = Rectangle(m_startX, m_startY, m_curX - m_startX, m_curY - m_startY);
 		e->Graphics->DrawRectangle(pen, rc);
 	}

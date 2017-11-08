@@ -49,7 +49,7 @@ namespace Form1
             // Hide the previous rectangle by calling the 
             // DrawReversibleFrame method with the same parameters.
             {
-                ControlPaint.DrawReversibleFrame(theRectangle, this.BackColor, FrameStyle.Dashed);
+                ControlPaint.DrawReversibleFrame(theRectangle, this.BackColor, FrameStyle.Thick);
 
                 // Calculate the endpoint and dimensions for the new 
                 // rectangle, again using the PointToScreen method.
@@ -61,7 +61,7 @@ namespace Form1
 
                 // Draw the new rectangle by calling DrawReversibleFrame
                 // again.  
-                ControlPaint.DrawReversibleFrame(theRectangle, this.BackColor, FrameStyle.Dashed);
+                ControlPaint.DrawReversibleFrame(theRectangle, this.BackColor, FrameStyle.Thick);
             }
         }
 
@@ -73,7 +73,7 @@ namespace Form1
 
             // Draw the rectangle to be evaluated. Set a dashed frame style 
             // using the FrameStyle enumeration.
-            ControlPaint.DrawReversibleFrame(theRectangle, this.BackColor, FrameStyle.Dashed);
+            ControlPaint.DrawReversibleFrame(theRectangle, this.BackColor, FrameStyle.Thick);
 
             // Find out which controls intersect the rectangle and 
             // change their color. The method uses the RectangleToScreen  

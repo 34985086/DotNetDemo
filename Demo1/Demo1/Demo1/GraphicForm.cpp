@@ -66,7 +66,7 @@ void GraphicForm::OnPaint(PaintEventArgs ^ e)
 	StringFormat^format = gcnew StringFormat;
 	format->Alignment = StringAlignment::Center;
 	format->LineAlignment = StringAlignment::Center;
-	g->DrawString("Hello world", gcnew Drawing::Font("Arial", 20), Brushes::White, rectF, format);
+	g->DrawString("Bottom", gcnew Drawing::Font("Arial", 20), Brushes::Black, rectF, format);
 #if 0
 	if (m_isPressed) {
 		Console::WriteLine("OnPaint");
