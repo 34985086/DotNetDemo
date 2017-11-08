@@ -1,10 +1,11 @@
 #include "GraphicForm.h"
+
 using namespace System::Drawing;
 GraphicForm::GraphicForm()
 {
 	CenterToScreen();
 	SetStyle(ControlStyles::OptimizedDoubleBuffer | ControlStyles::ResizeRedraw | ControlStyles::AllPaintingInWmPaint, true);
-	BackColor = Color::RoyalBlue;
+	BackColor = Color::DarkGray;
 
 	m_control = gcnew CustomControl();
 
@@ -24,6 +25,10 @@ GraphicForm::GraphicForm()
 	btn2->Text = "btn2";
 	btn2->Location = Point(100, 50);
 	Controls->Add(btn2);
+
+	//this->Opacity = 0.5;
+
+	m_selectionTool = gcnew SelectionTool();
 }
 
 GraphicForm::~GraphicForm()
@@ -73,7 +78,19 @@ void GraphicForm::OnPaint(PaintEventArgs ^ e)
 #endif
 }
 
+void GraphicForm::OnLocationChanged(System::EventArgs^ e)
+{
+	Console::WriteLine("GraphicForm::OnLocationChanged");
+	if (m_selectionTool) {
+		m_selectionTool->Location = PointToScreen(Point(0, 0));
+	}
+}
+
 void GraphicForm::OnSelectionBtnClick(System::Object ^sender, System::EventArgs ^e)
 {
-	m_control->Show();
+	if (!m_selectionTool->Visible) {
+		m_selectionTool->Size = this->ClientSize;
+		m_selectionTool->Location = this->PointToScreen(Point(0, 0));
+		m_selectionTool->Show(this);
+	}
 }

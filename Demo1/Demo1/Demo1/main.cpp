@@ -1,4 +1,3 @@
-#include "MyForm.h"
 #include "ReversibleForm.h"
 #include "GraphicForm.h"
 int main()
